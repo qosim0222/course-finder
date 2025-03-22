@@ -427,7 +427,7 @@ userRoute.delete("/:id", verifytoken, checkRole(["admin", "seo"]), remove);
 
 /**
  * @swagger
- * /send-reset-password:
+ *  /user/send-reset-password:
  *   post:
  *     tags: [User]
  *     summary: Send OTP to the provided email
@@ -456,7 +456,7 @@ userRoute.post('/send-reset-password', resetPassword)
 
 /**
  * @swagger
- * /reset-password:
+ *  /user/reset-password:
  *   post:
  *     tags: [User]
  *     summary: Send OTP to the provided email
@@ -475,11 +475,11 @@ userRoute.post('/send-reset-password', resetPassword)
  *               otp:
  *                 type: integer
  *                 description: The otp sended to email
- *                 example: user@gmail.com
+ *                 example: otp
  *               newPassword:
  *                 type: integer
  *                 description: The otp sended to email
- *                 example: user@gmail.com
+ *                 example: password
  *     security:
  *       - bearerAuth: []
  *     responses:

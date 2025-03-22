@@ -129,13 +129,6 @@ likedRoute.get("/", findAll);
  *         schema:
  *           type: integer
  *           default: 1
- *       - in: query
- *         name: pagesize
- *         required: false
- *         description: The number of items per page.
- *         schema:
- *           type: integer
- *           default: 10
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -192,7 +185,6 @@ likedRoute.get("/:id", findOne);
  *               oquvMarkazId:
  *                 type: integer
  *                 description: The ID of the Oquvmarkaz being liked.
- *                 example: 3
  *     security:
  *       - bearerAuth: []
  *     responses:

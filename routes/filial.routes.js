@@ -120,13 +120,6 @@ filialRoute.get("/", findAll);
  *           type: integer
  *           default: 1
  *       - in: query
- *         name: pagesize
- *         required: false
- *         description: The number of items per page.
- *         schema:
- *           type: integer
- *           default: 10
- *       - in: query
  *         name: limit
  *         required: false
  *         description: The number of results per page.

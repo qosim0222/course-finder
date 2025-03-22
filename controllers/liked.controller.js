@@ -76,28 +76,28 @@ async function findOne(req, res) {
         console.log(error);
         res.status(400).send(error)
     }
-};
-async function create(req, res) {
-    try {
-        let token = req.header("Authorization").split(" ").at(-1);
-        let data = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    };
+    async function create(req, res) {
+        try {
+            let token = req.header("Authorization").split(" ").at(-1);
+            let data = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-        let { error, value } = likedValidation.validate(req.body);
-        if (error) {
-            return res.status(400).send(error.details[0].message);
+            let { error, value } = likedValidation.validate(req.body);
+            if (error) {
+                return res.status(400).send(error.details[0].message);
+            }
+            req.body.userId = data.id;
+            let existingLike = await Liked.findOne({ where: { userId: req.body.userId, oquvMarkazId: req.body.oquvMarkazId } });
+            if (existingLike) {
+                return res.status(400).send("you already liked");
+            }
+            let newData = await Liked.create(req.body);
+            res.status(201).send(newData);
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
         }
-        req.body.userId = data.id;
-        let existingLike = await Liked.findOne({ where: { userId: req.body.userId, oquvMarkazId: req.body.oquvMarkazId } });
-        if (existingLike) {
-            return res.status(400).send("you already liked");
-        }
-        let newData = await Liked.create(req.body);
-        res.status(201).send(newData);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send(error);
-    }
-};
+    };
 async function remove(req, res) {
     try {
         await Liked.destroy({ where: { id: req.params.id } })
